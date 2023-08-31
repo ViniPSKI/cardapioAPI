@@ -11,10 +11,6 @@ public class FoodDeleteController {
     @Autowired
     private FoodRepository repository;
 
-    //DEU CERTO CARAIOOOOOOOO
-    /*
-        Aqui ele vai precisar de um ID no header, ai depois ele vai fazer o delete no banco.
-    */
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @DeleteMapping("/{id}")
     public void deleteFood(@PathVariable Long id){
