@@ -1,8 +1,10 @@
 package com.example.cardapio.controller;
 
 import com.example.cardapio.food.FoodRepository;
+import com.example.cardapio.food.FoodRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.example.cardapio.food.Food;
 
 @RestController
 @RequestMapping("edit")
@@ -12,9 +14,17 @@ public class FoodPatchController {
     private FoodRepository repository;
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PatchMapping("/{id}")
-    public void deleteFood(@PathVariable Long id){
-        repository.deleteById(id);
+    @PutMapping("/{id}")
+    public Food AlterFood(@PathVariable Long id, @RequestBody FoodRequestDTO foodRequestDTO){
+        Food foodToUpdate = repository.findById(id).get();
+
+        foodToUpdate.setTitle(foodRequestDTO.title());
+        foodToUpdate.setImage(foodRequestDTO.image());
+        foodToUpdate.setPrice(foodRequestDTO.price());
+
+        repository.save(foodToUpdate);
+
+        return repository.save(foodToUpdate);
     }
 
 }

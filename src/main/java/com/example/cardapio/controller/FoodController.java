@@ -25,6 +25,15 @@ public class FoodController {
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @GetMapping("/{id}")
+    public List<FoodResponseDTO> getWithId(@PathVariable Long id){
+
+        List<FoodResponseDTO> foodList = repository.findById(id).stream().map(FoodResponseDTO::new).toList();
+
+        return foodList;
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping
     public List<FoodResponseDTO> getAll(){
 
